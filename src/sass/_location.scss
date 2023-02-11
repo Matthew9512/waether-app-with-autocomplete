@@ -1,7 +1,7 @@
 .location {
   display: flex;
   gap: 2em;
-  padding: 2em;
+  // padding: 2em;
 
   background-color: green;
 
@@ -26,8 +26,8 @@
   }
 
   &-img {
-    width: 8em;
-    height: 8em;
+    width: 7em;
+    height: 7em;
     object-fit: cover;
     margin-top: 5em;
   }

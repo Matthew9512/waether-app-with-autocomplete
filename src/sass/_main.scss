@@ -123,11 +123,17 @@ body {
 }
 
 .container {
-  width: min(90%, 60em);
-  height: 80vh;
+  width: min(90%, 50em);
+  // height: 80vh;
   margin-inline: auto;
   display: grid;
   // grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
   grid-template-columns: repeat(2, minmax(20em, 1fr));
   grid-template-rows: 1fr;
+
+  @media screen and (max-width: 700px) {
+    grid-auto-flow: column-reverse;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+  }
 }

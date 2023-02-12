@@ -1,6 +1,6 @@
 import '/src/sass/styles.scss';
-import * as config from './config.js';
 import { state, getWeather, cityName } from './model.js';
+import { _options } from './config.js';
 
 const btnLocation = document.querySelector('.btn-location');
 const inpLocation = document.querySelector('.inp-location');
@@ -12,48 +12,48 @@ const locationAccess = function (position) {
   state.lat = latitude;
   state.long = longitude;
 
-  getWeather();
+  // location();
 };
 
 //
 const locationDecline = function () {
-  alert(`no access`);
+  alert(`There was an error getting your location. Please allow us to use your location and refresh the page.`);
+};
+
+//
+const location = async function () {
+  const respond = await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?location=%2B${state.lat}%2B${state.long}`, _options);
+  const data = await respond.json();
+
+  state.cityName = `${data.data.at(0).city}, ${data.data.at(0).country}`;
+
+  getWeather();
 };
 
 //
 export const dayInfo = function (hourly) {
-  const date = new Date();
+  const index = state.current.time.indexOf('T');
+  const time = state.current.time.trim().slice(index + 1);
+  const day = state.current.time.trim().slice(0, index);
 
-  let numberDay = date.getDate();
-  let month = date.getMonth() + 1;
-  const year = date.getFullYear();
-
-  const nameDay = date.getDay();
-  const hour = date.getHours();
-  const minute = date.getMinutes();
-
-  if (numberDay < 10) numberDay = `0${numberDay}`;
-  if (month < 10) month = `0${month}`;
-  if (minute < 10) minute = `0${minute}`;
-
-  if (hourly) {
-    const day = `${year}-${month}-${numberDay}`;
-    const time = `${hour}:00`;
-
-    const actualTime = `${day}T${time}`;
-    return actualTime;
-  } else {
-    const day = `${numberDay}.${month}.${year}`;
-    const time = `${nameDay}, ${hour}:${minute}`;
-    return [day, time];
-  }
+  if (hourly) return `${day}T${time}`;
+  else return [day, time];
 };
 
 navigator.geolocation.getCurrentPosition(locationAccess, locationDecline);
 btnLocation.addEventListener('click', () => {
+  const city = state.cityData.find((value) => `${value.cityName}, ${value.countryCode}` === inpLocation.value);
+
+  state.lat = city.lat;
+  state.long = city.long;
+  state.cityName = `${city.cityName}, ${city.countryName}`;
+
   getWeather();
+
+  inpLocation.value = '';
 });
 inpLocation.addEventListener('input', () => {
   state.cityName = inpLocation.value;
+  if (inpLocation.value.includes(',')) return;
   cityName();
 });

@@ -1,7 +1,8 @@
-.forecast {
-  // padding: 2em;
+@use 'main';
 
-  background-color: rgb(98, 98, 35);
+.forecast {
+  font-size: main.$smaller-font;
+  overflow-x: hidden;
 
   &__search {
     display: flex;
@@ -25,27 +26,27 @@
       border: 2px solid transparent;
       border-radius: 8px;
       outline: none;
-      background-color: #f3f3f4;
-      color: #0d0c22;
+      background-color: main.$light-navy;
+      color: main.$blue;
       transition: 0.3s ease;
     }
 
     .inp::placeholder {
-      color: #9e9ea7;
+      color: main.$blue;
     }
 
     .inp:focus,
     .inp:hover {
       outline: none;
-      border-color: rgba(234, 76, 137, 0.4);
-      background-color: #fff;
+      border-color: main.$blue-tint;
+      background-color: main.$light-navy;
       box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
     }
 
     .icon {
       position: absolute;
       left: 1rem;
-      fill: #9e9ea7;
+      fill: main.$blue;
       width: 1rem;
       height: 1rem;
     }
@@ -54,17 +55,33 @@
   &__hours {
     display: flex;
     flex-direction: row-reverse;
-    gap: 0.5em;
+    gap: 1em;
     padding: 0.5em;
-    margin-top: 2em;
+    margin-block: 2em;
     border-radius: 0.5em;
+    width: 100%;
     overflow-x: scroll;
-
-    background-color: rgb(131, 131, 49);
 
     &-item {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      gap: 0.7em;
+      padding: 0.5em;
+      border-radius: 0.4em;
+      // background-color: main.$light-navy;
     }
+  }
+
+  .btn-location {
+    padding-inline: 2em;
+    border-radius: 0.5em;
+    border: none;
+    outline: none;
+    color: main.$blue;
+    background-color: main.$light-navy;
+  }
+  .fa-location-dot {
+    margin-right: 0.7em;
   }
 }

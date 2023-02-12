@@ -1,26 +1,30 @@
+@use 'main';
+
 .location {
   display: flex;
   gap: 2em;
-  // padding: 2em;
-
-  background-color: green;
+  font-size: main.$smaller-font;
 
   &__info {
     display: flex;
     flex-direction: column;
     gap: 2em;
 
+    &-div-title {
+      color: main.$blue;
+      font-size: main.$bigger-font;
+    }
+
     &-city {
       &-capitol {
-        font-size: 1.5rem;
-        font-weight: 700;
+        color: main.$blue;
+        font-size: main.$bigger-font;
       }
     }
 
     &-weather {
       &-temp {
-        font-size: 1.5rem;
-        font-weight: 700;
+        @extend .location__info-city-capitol;
       }
     }
   }
@@ -28,7 +32,7 @@
   &-img {
     width: 7em;
     height: 7em;
-    object-fit: cover;
     margin-top: 5em;
+    margin-right: 2em;
   }
 }

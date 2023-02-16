@@ -10,24 +10,17 @@
   </head>
   <body>
     <main class="container">
+      <!-- loader -->
+      <div class="loader">
+        <div class="loader__box">
+          <span class="loader__box-circle"></span>
+          <span class="loader__box-circle"></span>
+          <span class="loader__box-circle"></span>
+          <span class="loader__box-circle"></span>
+        </div>
+      </div>
       <section class="location">
-        <!-- <article class="location__info">
-          <div class="location__info-div">
-            <p class="location__info-div-title">Weather forecast</p>
-            <p class="location__info-div-date">(mon 10.02.2023)</p>
-          </div>
-          <div class="location__info-city">
-            <p class="location__info-city-capitol">Warsaw</p>
-            <p class="location__info-city-country">Poland</p>
-          </div>
-          <div class="location__info-weather">
-            <p class="location__info-weather-temp">26*C</p>
-            <p class="location__info-weather-wind">Wind: 4km</p>
-            <p class="location__info-weather-humidity">Humidity: 50%</p>
-            <p class="location__info-weather-rain">Rainfall : 50%</p>
-          </div>
-        </article>
-        <img src="./sun.jpg" alt="" class="location-img" /> -->
+        <!-- location info -->
       </section>
       <section class="forecast">
         <div class="forecast__search">
@@ -39,40 +32,19 @@
                 ></path>
               </g>
             </svg>
-            <!-- test -->
             <input placeholder="Search" type="search" class="inp inp-location" list="cities" />
             <datalist id="cities"></datalist>
-            <!-- test -->
-            <!-- <input placeholder="Search" type="search" class="inp inp-location" /> -->
           </div>
           <button class="btn btn-location"><i class="fa-solid fa-location-dot"></i> Find</button>
         </div>
         <div class="forecast__hours">
-          <!-- <div class="forecast__hours-item">
-            <p class="forecast__hours-item-hour">12:00</p>
-            <p class="forecast__hours-item-icon">sun icon</p>
-            <p class="forecast__hours-item-temp">15^C</p>
-            <p class="forecast__hours-item-rainfall">4%</p>
-          </div>
-          <div class="forecast__hours-item">
-            <p class="forecast__hours-item-hour">12:00</p>
-            <p class="forecast__hours-item-icon">sun icon</p>
-            <p class="forecast__hours-item-temp">15^C</p>
-            <p class="forecast__hours-item-rainfall">4%</p>
-          </div> -->
+          <!-- forecast hourly -->
         </div>
       </section>
       <section class="weekly">
         <p class="weekly__header">Weekly forecast</p>
         <div class="weekly__forecast">
-          <!-- <div class="weekly__forecast-item">
-            <p class="weekly__forecast-item-date">Fri 05.05</p>
-            <p class="weekly__forecast-item-icon">(sun icon)</p>
-            <div class="weekly__forecast-item-temp">
-              <p class="weekly__forecast-item-temp-day">20*C</p>
-              <p class="weekly__forecast-item-temp-night">15*C</p>
-            </div>
-          </div> -->
+          <!-- weekly forecast -->
         </div>
       </section>
     </main>

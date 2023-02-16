@@ -16,6 +16,6 @@ export const weeklyView = function () {
         <p class="weekly__forecast-item-temp-night">${parseInt(state.weekly.tempNight[i])}°C</p>
     </div>
   </div>`;
-    weeklyForecast.insertAdjacentHTML('afterbegin', html);
+    weeklyForecast.insertAdjacentHTML('beforeend', html);
   }
 };

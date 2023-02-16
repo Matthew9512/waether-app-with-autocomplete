@@ -15,20 +15,26 @@ export const state = {
   cityData: [],
 };
 
-//
+// map for weather icons
 export const iconsMap = new Map();
-export const valuesMap = new Map();
 
-//
+// fetch weather data
 export const getWeather = async function () {
-  const respond = await fetch(`${config.API_LINK}latitude=${state.lat}&longitude=${state.long}&${config.API_SCOPE}
-  `);
-  const data = await respond.json();
+  const loader = document.querySelector('.loader');
 
-  destructuringData(data);
+  try {
+    const respond = await fetch(`${config.API_LINK}latitude=${state.lat}&longitude=${state.long}&${config.API_SCOPE}
+  `);
+    const data = await respond.json();
+
+    destructuringData(data);
+    loader.classList.add('hidden');
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
-//
+// destructur weather data and set them to global object
 const destructuringData = function (data) {
   const hourly = true;
 
@@ -49,10 +55,10 @@ const destructuringData = function (data) {
 
   const actualTime = dayInfo(hourly);
 
-  // need 24 indexes from actual hour
+  // find in hourly data index of local time
   const indexOfActualTime = data.hourly.time.indexOf(actualTime);
 
-  //
+  // set global object with data of hourly weather data for next day
   state.hourly = {
     temp: data.hourly.temperature_2m.splice(indexOfActualTime, 24),
     time: data.hourly.time.splice(indexOfActualTime, 24),
@@ -65,7 +71,7 @@ const destructuringData = function (data) {
   hourlyView();
 };
 
-//
+// set weather icons
 export const setIcons = function (values, icon) {
   values.forEach((value) => {
     iconsMap.set(value, icon);
@@ -80,33 +86,32 @@ setIcons([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82], 'cloud-showers-he
 setIcons([71, 73, 75, 77, 85, 86], 'snowflake');
 setIcons([95, 96, 99], 'cloud-bolt');
 
-//
+// return specific weather icon
 export const addIcons = function (icon) {
   return iconsMap.get(icon);
 };
 
-//
-export const addValues = function (value) {
-  return valuesMap.get(value);
-};
-
-//
+// fetch weather data based on input city name value
 export const cityName = config._debounce(async function () {
-  const respond = await fetch(
-    `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?minPopulation=10000&namePrefix=${state.cityName}`,
-    config._options
-  );
-  const data = await respond.json();
+  try {
+    const respond = await fetch(
+      `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?minPopulation=10000&namePrefix=${state.cityName}`,
+      config._options
+    );
+    const data = await respond.json();
 
-  state.cityData = data.data.map((value) => {
-    return {
-      cityName: value.city,
-      countryName: value.country,
-      countryCode: value.countryCode,
-      lat: value.latitude,
-      long: value.longitude,
-    };
-  });
+    state.cityData = data.data.map((value) => {
+      return {
+        cityName: value.city,
+        countryName: value.country,
+        countryCode: value.countryCode,
+        lat: value.latitude,
+        long: value.longitude,
+      };
+    });
 
-  cityOptions();
+    cityOptions();
+  } catch (error) {
+    console.log(error.message);
+  }
 });

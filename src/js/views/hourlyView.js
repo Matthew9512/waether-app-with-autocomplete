@@ -5,9 +5,8 @@ export const hourlyView = function () {
   forecastHours.innerHTML = '';
 
   for (let i = 0; i < state.hourly.icon.length; i++) {
-    //
     const icon = addIcons(state.hourly.icon[i]);
-    //
+
     const index = state.hourly.time[i].indexOf('T');
     const html = `
       <div class="forecast__hours-item">
@@ -16,6 +15,6 @@ export const hourlyView = function () {
         <p class="forecast__hours-item-temp">${parseInt(state.hourly.temp[i])}°C</p>
         <p class="forecast__hours-item-wind">${parseInt(state.hourly.wind[i])}km/h</p>
       </div>`;
-    forecastHours.insertAdjacentHTML('afterbegin', html);
+    forecastHours.insertAdjacentHTML('beforeend', html);
   }
 };

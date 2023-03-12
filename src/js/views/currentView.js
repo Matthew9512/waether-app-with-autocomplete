@@ -25,6 +25,6 @@ export const currentView = function () {
         <p class="location__info-weather-rain">Real fell: ${parseInt(state.weekly.realTemp.at(0))}°C</p>
       </div>
     </article>
-      <img src="../../../img/${icon}.svg" alt="" class="location-img" />`;
+      <img src="../../../${icon}.svg" alt="" class="location-img" />`;
   location.insertAdjacentHTML('afterbegin', html);
 };

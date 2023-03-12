@@ -11,7 +11,7 @@ export const hourlyView = function () {
     const html = `
       <div class="forecast__hours-item">
         <p class="forecast__hours-item-hour">${state.hourly.time[i].slice(index + 1)}</p>
-        <img src="../../img/${icon}.svg" alt="Weather icon" class="weekly__forecast-item-icon" />
+        <img src="${icon}.svg" alt="Weather icon" class="weekly__forecast-item-icon" />
         <p class="forecast__hours-item-temp">${parseInt(state.hourly.temp[i])}°C</p>
         <p class="forecast__hours-item-wind">${parseInt(state.hourly.wind[i])}km/h</p>
       </div>`;

@@ -17,7 +17,13 @@ const locationAccess = function (position) {
 
 // user decline location access
 const locationDecline = function () {
-  alert(`There was an error getting your location. Please allow us to use your location and refresh the page.`);
+  const loader = document.querySelector('.loader');
+  const weekly = document.querySelector('.weekly');
+  loader.classList.add('hidden');
+  weekly.classList.add('hidden');
+  setTimeout(() => {
+    alert(`There was an error getting your location. Please allow us to use your location and refresh the page.`);
+  }, 500);
 };
 
 // fetch data for users current location
@@ -53,6 +59,9 @@ btnLocation.addEventListener('click', () => {
   state.cityName = `${city.cityName}, ${city.countryName}`;
 
   getWeather();
+
+  const weekly = document.querySelector('.weekly');
+  weekly.classList.remove('hidden');
 
   inpLocation.value = '';
 });

@@ -12,7 +12,7 @@ export const _options = {
   },
 };
 
-export const _debounce = function (fn, deley = 1100) {
+export const _debounce = function (fn, deley = 600) {
   let id;
   return (...args) => {
     if (id) clearInterval(id);
